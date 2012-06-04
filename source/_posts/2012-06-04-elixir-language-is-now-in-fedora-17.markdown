@@ -3,7 +3,7 @@ layout: post
 title: "Elixir Language is now in Fedora 17"
 date: 2012-06-04 11:24
 comments: true
-categories: fedora elixir programming
+categories: [fedora, elixir, programming]
 ---
 
 Well it's been a week since my 
