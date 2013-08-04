@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fedora | CodeBlock's Blog]]></title>
+  <link href="http://blog.elrod.me/blog/categories/fedora/atom.xml" rel="self"/>
+  <link href="http://blog.elrod.me/"/>
+  <updated>2013-08-04T03:09:06-04:00</updated>
+  <id>http://blog.elrod.me/</id>
+  <author>
+    <name><![CDATA[Ricky Elrod]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Goodbye to a great friend]]></title>
+    <link href="http://blog.elrod.me/blog/2013/07/09/goodbye-to-a-true-friend/"/>
+    <updated>2013-07-09T23:45:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2013/07/09/goodbye-to-a-true-friend</id>
+    <content type="html"><![CDATA[<p>I first met Seth on IRC in June of 2010 when I joined the Infrastructure team.
+From the very start, I admired his ability to say what he feels about something
+without holding back. He was always able to tell someone how amazing or how bad
+their idea was, in relation to something else. This made him very unique.
+He was always very good at explaining his thought process, as well. He never
+failed to have real, valid reasons for thinking so strongly about something. It
+was never a blind emotion.</p>
+
+<p>He was extremely caring. This past Fudcon, a small group of us went to get
+dinner, and I was particularly quiet because I was tired. He turned to me and
+asked, very genuinely, &ldquo;Are you okay? You look like something is bothering you.&rdquo;
+He was always that way, and if someone needed help with something, he would
+drop what he was doing to go help them.</p>
+
+<p>He was a very productive person. Always on IRC, even in the early morning hours
+with me sometimes, whenever I needed help with something I was working on, or
+when servers blew up, and I had trouble determining why.</p>
+
+<p>He was a very logical person, and all three FUDCons that I have attended were
+filled with evenings of him talking about anything from software, to food, to
+philosophy. And he retained the quality of having very logical reasons for what
+he was saying, each and every time.</p>
+
+<p>But most of all, he was a good friend. Someone that I knew I could talk to if I
+needed help with things. Someone who could make you feel better when you were
+having a bad day. Someone who genuinely cared about me and my success.</p>
+
+<p>Seth, I only knew you for 3 very short years, but I will sincerely miss you. You
+were a great friend and community member, and words alone cannot express my
+feelings of loss.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-flask coming to EPEL 6 soon-ish]]></title>
+    <link href="http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
+    <updated>2012-07-11T18:20:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6</id>
+    <content type="html"><![CDATA[<p>For those not aware, I recently picked up the python-flask and python-werkzeug
+packages, which were going to be orphaned.</p>
+
+<p>I&rsquo;ve spent the majority of today working on getting python-flask and its
+dependencies working on EPEL 6, with Ian Weller.</p>
+
+<p>The current plan is to get Flask 0.9 in EPEL right from the get-go.</p>
+
+<p>There are two small patches we need to apply to the package to make using it
+as painless as possible on RHEL environments. They both relate to telling
+Flask to use the right Jinja2 package.</p>
+
+<p>RHEL6-optional has Jinja 2.2.1. Flask requires 2.4 or greater. So we use the
+EPEL version of Jinja2, <code>python-jinja2-26</code> which gives us Jinja 2.6. But we
+need to tell Flask that it should import the 2.6 version, not the 2.2 version.</p>
+
+<p>The other blocker is <code>python2-werkzeug</code> &mdash; the current EPEL 6 version of
+werkzeug is 0.6.2. The plan there is to update that to 0.8.3, pending an
+exemption of the Incompatible Upgrades Policy, at the EPEL meeting on Monday.</p>
+
+<p>In any case, I just wanted to throw it out there that we are working on this
+and we plan on having these pushed to EPEL soon. We&rsquo;re starting to develop
+some custom apps with Flask, for use in the Fedora Infrastructure, so
+this had to be done sooner or later.</p>
+
+<p>Stay tuned.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Elixir Language is now in Fedora 17]]></title>
+    <link href="http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
+    <updated>2012-06-04T11:24:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
+    <content type="html"><![CDATA[<p>Well it&rsquo;s been a week since my
+<a href="http://elixir-lang.org/">Elixir language</a> package got
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=825418#c4">approved</a> and I am
+happy to announce that it has been pushed to stable, and now appears in the
+Fedora 17 updates repository.</p>
+
+<p>Anyone who uses Fedora 17 or Fedora Rawhide, and wants to try out the new
+programming language by José Valim (which runs on the Erlang VM), can simply:
+<code>sudo yum install elixir</code></p>
+
+<p>I might later on introduce an <code>elixir-git</code> subpackage for rawhide that tracks
+Elixir&rsquo;s git repository more closely, but for now the <code>elixir</code> package tracks
+the stable, currently 0.5.0 release, of Elixir.</p>
+
+<p><code>elixir
+iex&gt; IO.puts "Happy hacking!"
+Happy hacking!
+:ok
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora 17 on Raspberry Pi]]></title>
+    <link href="http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi/"/>
+    <updated>2012-05-29T09:05:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>So about two weeks ago I received my
+<a href="http://www.raspberrypi.org/">Raspberry Pi</a>. Unfortunately I&rsquo;ve not had too
+much time to actually play around with it. The day I got it I was leaving for
+the <a href="http://hamvention.com">Dayton Hamvention</a>, so I had to get ready to go.</p>
+
+<p>I had a few short hours that day, and did try out a few of the different
+suggested distro images for the Pi. I first tried Fedora (the F14 remix),
+then tried Debian, and I even tried Arch. They all worked (though I did have
+problems with a large amount of packet loss among all of them, from the
+ethernet port, but it seems to have worked itself out &mdash; might have been a
+loose connection from the cable to the router).</p>
+
+<p>After trying the various distros, I left for the Hamvention (taking it with me
+to show off to my friends from the
+<a href="http://www.w8upd.org">University of Akron Ham Radio Club</a>). But when I got
+back home, it just pretty much stayed in its box. This is mostly because
+I don&rsquo;t have an HDMI cable (I&rsquo;ll be ordering one next week), and so I have to
+time playing with the Pi against my mom wanting to watch TV, and use the RCA
+connector.</p>
+
+<p>Well tonight I had an interesting idea. I was hanging out with
+<a href="http://kg4sgp.com">KG4SGP</a> who is in from Virginia, and we were talking about
+several projects, and where the Pi might fit into them.</p>
+
+<p>When I got home from hanging out, I decided that it&rsquo;d be better to let my Pi
+run just as a server that I can ssh into and play with, than just having it
+sit in the box and doing nothing. I really do like the Pi, it&rsquo;s so awesome
+that this little thing that can run off a USB port can run a full Linux
+distro. I wanted to use it!</p>
+
+<p>While I was at it, I decided I&rsquo;d try to get Fedora 17 on it. I grabbed the
+<a href="http://scotland.proximity.on.ca/arm-nightlies/">latest F17 arm nightly</a>
+(no X), flashed it to the SD card, got it booted in the Pi, set up static
+networking, and got the Pi ssh-able. So now I have a Fedora 17 ARM playground.</p>
+
+<p><img class="<a" src="href="http://images.srv1.elrod.me/fedora-17-arm.png">http://images.srv1.elrod.me/fedora-17-arm.png</a>" title="&ldquo;htop&rdquo;" ></p>
+
+<p><img class="<a" src="href="http://images.srv1.elrod.me/fedora-17-arm-playing-around.png">http://images.srv1.elrod.me/fedora-17-arm-playing-around.png</a>" title="&ldquo;Playing around and showing off the Pi&rdquo;" ></p>
+
+<p>So &mdash; Yeah. This thing is cool. Time to play with the
+<a href="http://elinux.org/RPi_Low-level_peripherals#GPIO_Driving_Example_.28Python.29">GPIO pins</a>
+and make something cool!</p>
+]]></content>
+  </entry>
+  
+</feed>

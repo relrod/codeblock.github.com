@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | CodeBlock's Blog]]></title>
+  <link href="http://blog.elrod.me/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://blog.elrod.me/"/>
+  <updated>2013-08-04T03:09:06-04:00</updated>
+  <id>http://blog.elrod.me/</id>
+  <author>
+    <name><![CDATA[Ricky Elrod]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[python-flask coming to EPEL 6 soon-ish]]></title>
+    <link href="http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
+    <updated>2012-07-11T18:20:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6</id>
+    <content type="html"><![CDATA[<p>For those not aware, I recently picked up the python-flask and python-werkzeug
+packages, which were going to be orphaned.</p>
+
+<p>I&rsquo;ve spent the majority of today working on getting python-flask and its
+dependencies working on EPEL 6, with Ian Weller.</p>
+
+<p>The current plan is to get Flask 0.9 in EPEL right from the get-go.</p>
+
+<p>There are two small patches we need to apply to the package to make using it
+as painless as possible on RHEL environments. They both relate to telling
+Flask to use the right Jinja2 package.</p>
+
+<p>RHEL6-optional has Jinja 2.2.1. Flask requires 2.4 or greater. So we use the
+EPEL version of Jinja2, <code>python-jinja2-26</code> which gives us Jinja 2.6. But we
+need to tell Flask that it should import the 2.6 version, not the 2.2 version.</p>
+
+<p>The other blocker is <code>python2-werkzeug</code> &mdash; the current EPEL 6 version of
+werkzeug is 0.6.2. The plan there is to update that to 0.8.3, pending an
+exemption of the Incompatible Upgrades Policy, at the EPEL meeting on Monday.</p>
+
+<p>In any case, I just wanted to throw it out there that we are working on this
+and we plan on having these pushed to EPEL soon. We&rsquo;re starting to develop
+some custom apps with Flask, for use in the Fedora Infrastructure, so
+this had to be done sooner or later.</p>
+
+<p>Stay tuned.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Elixir Language is now in Fedora 17]]></title>
+    <link href="http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
+    <updated>2012-06-04T11:24:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
+    <content type="html"><![CDATA[<p>Well it&rsquo;s been a week since my
+<a href="http://elixir-lang.org/">Elixir language</a> package got
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=825418#c4">approved</a> and I am
+happy to announce that it has been pushed to stable, and now appears in the
+Fedora 17 updates repository.</p>
+
+<p>Anyone who uses Fedora 17 or Fedora Rawhide, and wants to try out the new
+programming language by José Valim (which runs on the Erlang VM), can simply:
+<code>sudo yum install elixir</code></p>
+
+<p>I might later on introduce an <code>elixir-git</code> subpackage for rawhide that tracks
+Elixir&rsquo;s git repository more closely, but for now the <code>elixir</code> package tracks
+the stable, currently 0.5.0 release, of Elixir.</p>
+
+<p><code>elixir
+iex&gt; IO.puts "Happy hacking!"
+Happy hacking!
+:ok
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

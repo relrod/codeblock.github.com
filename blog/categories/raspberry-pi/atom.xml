@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: raspberry pi | CodeBlock's Blog]]></title>
+  <link href="http://blog.elrod.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
+  <link href="http://blog.elrod.me/"/>
+  <updated>2013-08-04T03:09:06-04:00</updated>
+  <id>http://blog.elrod.me/</id>
+  <author>
+    <name><![CDATA[Ricky Elrod]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora 17 on Raspberry Pi]]></title>
+    <link href="http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi/"/>
+    <updated>2012-05-29T09:05:00-04:00</updated>
+    <id>http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>So about two weeks ago I received my
+<a href="http://www.raspberrypi.org/">Raspberry Pi</a>. Unfortunately I&rsquo;ve not had too
+much time to actually play around with it. The day I got it I was leaving for
+the <a href="http://hamvention.com">Dayton Hamvention</a>, so I had to get ready to go.</p>
+
+<p>I had a few short hours that day, and did try out a few of the different
+suggested distro images for the Pi. I first tried Fedora (the F14 remix),
+then tried Debian, and I even tried Arch. They all worked (though I did have
+problems with a large amount of packet loss among all of them, from the
+ethernet port, but it seems to have worked itself out &mdash; might have been a
+loose connection from the cable to the router).</p>
+
+<p>After trying the various distros, I left for the Hamvention (taking it with me
+to show off to my friends from the
+<a href="http://www.w8upd.org">University of Akron Ham Radio Club</a>). But when I got
+back home, it just pretty much stayed in its box. This is mostly because
+I don&rsquo;t have an HDMI cable (I&rsquo;ll be ordering one next week), and so I have to
+time playing with the Pi against my mom wanting to watch TV, and use the RCA
+connector.</p>
+
+<p>Well tonight I had an interesting idea. I was hanging out with
+<a href="http://kg4sgp.com">KG4SGP</a> who is in from Virginia, and we were talking about
+several projects, and where the Pi might fit into them.</p>
+
+<p>When I got home from hanging out, I decided that it&rsquo;d be better to let my Pi
+run just as a server that I can ssh into and play with, than just having it
+sit in the box and doing nothing. I really do like the Pi, it&rsquo;s so awesome
+that this little thing that can run off a USB port can run a full Linux
+distro. I wanted to use it!</p>
+
+<p>While I was at it, I decided I&rsquo;d try to get Fedora 17 on it. I grabbed the
+<a href="http://scotland.proximity.on.ca/arm-nightlies/">latest F17 arm nightly</a>
+(no X), flashed it to the SD card, got it booted in the Pi, set up static
+networking, and got the Pi ssh-able. So now I have a Fedora 17 ARM playground.</p>
+
+<p><img class="<a" src="href="http://images.srv1.elrod.me/fedora-17-arm.png">http://images.srv1.elrod.me/fedora-17-arm.png</a>" title="&ldquo;htop&rdquo;" ></p>
+
+<p><img class="<a" src="href="http://images.srv1.elrod.me/fedora-17-arm-playing-around.png">http://images.srv1.elrod.me/fedora-17-arm-playing-around.png</a>" title="&ldquo;Playing around and showing off the Pi&rdquo;" ></p>
+
+<p>So &mdash; Yeah. This thing is cool. Time to play with the
+<a href="http://elinux.org/RPi_Low-level_peripherals#GPIO_Driving_Example_.28Python.29">GPIO pins</a>
+and make something cool!</p>
+]]></content>
+  </entry>
+  
+</feed>
