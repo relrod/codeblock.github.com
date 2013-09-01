@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: offtopic | CodeBlock's Blog]]></title>
-  <link href="http://blog.elrod.me/blog/categories/offtopic/atom.xml" rel="self"/>
-  <link href="http://blog.elrod.me/"/>
-  <updated>2013-08-04T03:12:46-04:00</updated>
-  <id>http://blog.elrod.me/</id>
+  <link href="http://CodeBlock.github.io/blog/categories/offtopic/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-09-01T16:08:29-04:00</updated>
+  <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Piano Song from 'How I Met Your Mother']]></title>
-    <link href="http://blog.elrod.me/blog/2012/06/16/piano-song-from-how-i-met-your-mother/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/06/16/piano-song-from-how-i-met-your-mother/"/>
     <updated>2012-06-16T04:18:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/06/16/piano-song-from-how-i-met-your-mother</id>
+    <id>http://CodeBlock.github.io/blog/2012/06/16/piano-song-from-how-i-met-your-mother</id>
     <content type="html"><![CDATA[<p>So, this is very offtopic from what I normally blog about (programming stuff,
 sysadmin stuff, etc). I&rsquo;ll be posting about a project I&rsquo;ve been working on
 for Fedora Hosted soon.</p>

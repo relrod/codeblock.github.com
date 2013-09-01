@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: fedora, | CodeBlock's Blog]]></title>
-  <link href="http://CodeBlock.github.io/blog/categories/fedora/atom.xml" rel="self"/>
+  <title><![CDATA[Category: infrastructure | CodeBlock's Blog]]></title>
+  <link href="http://CodeBlock.github.io/blog/categories/infrastructure/atom.xml" rel="self"/>
   <link href="http://CodeBlock.github.io/"/>
   <updated>2013-09-01T16:08:29-04:00</updated>
   <id>http://CodeBlock.github.io/</id>

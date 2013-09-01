@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: raspberry pi | CodeBlock's Blog]]></title>
-  <link href="http://blog.elrod.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
-  <link href="http://blog.elrod.me/"/>
-  <updated>2013-08-04T03:12:46-04:00</updated>
-  <id>http://blog.elrod.me/</id>
+  <link href="http://CodeBlock.github.io/blog/categories/raspberry-pi/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-09-01T16:08:29-04:00</updated>
+  <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fedora 17 on Raspberry Pi]]></title>
-    <link href="http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/05/29/fedora-17-on-raspberry-pi/"/>
     <updated>2012-05-29T09:05:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/05/29/fedora-17-on-raspberry-pi</id>
+    <id>http://CodeBlock.github.io/blog/2012/05/29/fedora-17-on-raspberry-pi</id>
     <content type="html"><![CDATA[<p>So about two weeks ago I received my
 <a href="http://www.raspberrypi.org/">Raspberry Pi</a>. Unfortunately I&rsquo;ve not had too
 much time to actually play around with it. The day I got it I was leaving for

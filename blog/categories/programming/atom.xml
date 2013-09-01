@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: programming | CodeBlock's Blog]]></title>
-  <link href="http://blog.elrod.me/blog/categories/programming/atom.xml" rel="self"/>
-  <link href="http://blog.elrod.me/"/>
-  <updated>2013-08-04T03:12:46-04:00</updated>
-  <id>http://blog.elrod.me/</id>
+  <link href="http://CodeBlock.github.io/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-09-01T16:08:29-04:00</updated>
+  <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[python-flask coming to EPEL 6 soon-ish]]></title>
-    <link href="http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
     <updated>2012-07-11T18:20:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6</id>
+    <id>http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6</id>
     <content type="html"><![CDATA[<p>For those not aware, I recently picked up the python-flask and python-werkzeug
 packages, which were going to be orphaned.</p>
 
@@ -49,9 +49,9 @@ this had to be done sooner or later.</p>
   
   <entry>
     <title type="html"><![CDATA[Elixir Language is now in Fedora 17]]></title>
-    <link href="http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
     <updated>2012-06-04T11:24:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
+    <id>http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
     <content type="html"><![CDATA[<p>Well it&rsquo;s been a week since my
 <a href="http://elixir-lang.org/">Elixir language</a> package got
 <a href="https://bugzilla.redhat.com/show_bug.cgi?id=825418#c4">approved</a> and I am

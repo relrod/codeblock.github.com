@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: python | CodeBlock's Blog]]></title>
-  <link href="http://blog.elrod.me/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://blog.elrod.me/"/>
-  <updated>2013-08-04T03:12:46-04:00</updated>
-  <id>http://blog.elrod.me/</id>
+  <link href="http://CodeBlock.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-09-01T16:08:29-04:00</updated>
+  <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[python-flask coming to EPEL 6 soon-ish]]></title>
-    <link href="http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
     <updated>2012-07-11T18:20:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/07/11/python-flask-coming-to-epel-6</id>
+    <id>http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6</id>
     <content type="html"><![CDATA[<p>For those not aware, I recently picked up the python-flask and python-werkzeug
 packages, which were going to be orphaned.</p>
 

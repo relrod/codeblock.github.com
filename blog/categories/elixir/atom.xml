@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: elixir | CodeBlock's Blog]]></title>
-  <link href="http://blog.elrod.me/blog/categories/elixir/atom.xml" rel="self"/>
-  <link href="http://blog.elrod.me/"/>
-  <updated>2013-08-04T03:12:46-04:00</updated>
-  <id>http://blog.elrod.me/</id>
+  <link href="http://CodeBlock.github.io/blog/categories/elixir/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-09-01T16:08:29-04:00</updated>
+  <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Elixir Language is now in Fedora 17]]></title>
-    <link href="http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
+    <link href="http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
     <updated>2012-06-04T11:24:00-04:00</updated>
-    <id>http://blog.elrod.me/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
+    <id>http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
     <content type="html"><![CDATA[<p>Well it&rsquo;s been a week since my
 <a href="http://elixir-lang.org/">Elixir language</a> package got
 <a href="https://bugzilla.redhat.com/show_bug.cgi?id=825418#c4">approved</a> and I am

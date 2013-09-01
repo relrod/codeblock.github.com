@@ -9,8 +9,10 @@
   <meta name="author" content="Ricky Elrod">
 
   
-  <meta name="description" content="I first met Seth on IRC in June of 2010 when I joined the Infrastructure team.
-From the very start, I admired his ability to say what he feels about &hellip;">
+  <meta name="description" content="Today I deployed
+mw-FedoraBadges to production
+in Fedora Infrastructure. It had been in staging for several days now, and we
+wanted to get it live &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ From the very start, I admired his ability to say what he feels about &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.elrod.me/">
+  <link rel="canonical" href="http://CodeBlock.github.io/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -54,7 +56,7 @@ From the very start, I admired his ability to say what he feels about &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.elrod.me" />
+    <input type="hidden" name="q" value="site:CodeBlock.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -76,6 +78,142 @@ From the very start, I admired his ability to say what he feels about &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/01/how-to-not-look-like-a-fool-due-to-haproxy/">How to Not Look Like a Fool Due to Haproxy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-01T15:23:00-04:00" pubdate data-updated="true">Sep 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/01/how-to-not-look-like-a-fool-due-to-haproxy/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I deployed
+<a href="https://github.com/CodeBlock/mw-FedoraBadges">mw-FedoraBadges</a> to production
+in Fedora Infrastructure. It had been in staging for several days now, and we
+wanted to get it live before the freeze.</p>
+
+<p>As I deployed it, a few interesting things happened.</p>
+
+<p>First off, it&rsquo;s useful to know that we use haproxy in front of our app servers.
+Haproxy basically creates a round-robin of app servers for each application
+that it sits in front of, and internally routes requests to random servers (or
+servers based on a set of criteria).</p>
+
+<p>Today I went to move the mw-FedoraBadges extension out of staging and into
+production. When I did this, I moved all of the files that I modified from our
+<code>modules-staging/mediawiki</code> directory into <code>modules/mediawiki</code> &ndash; or so I
+thought.</p>
+
+<p>It turns out that I missed one file &ndash; the module manifest, which had an
+important change in it: it added the <code>mediawiki-FedoraBadges</code> package as a
+required package on machines which include the <code>mediawiki</code> module. The other
+files (a small CSS tweak, and a much more important one-line change to the
+wiki&rsquo;s <code>LocalSettings.php</code> config file, which included the extension) all
+deployed just fine. But since <code>LocalSettings.php</code> had updated and the servers
+knew nothing of the package that <code>LocalSettings.php</code> was requiring, things
+started to 500.</p>
+
+<p>Luckily, when I make big changes like this, I only trigger a run of Puppet on a
+very small subset of our app servers &mdash; in this case, one server. As soon as it
+updated all files but didn&rsquo;t show any sign of installing a new package, I knew
+what I had done.</p>
+
+<p>I quickly checked the haproxy status page of one of our proxies (it didn&rsquo;t
+matter which, since they largely share the same configuration), to make sure
+that it had pulled the app server out of its internal round-robin.</p>
+
+<p>I saw this and instantly breathed a sigh of relief:</p>
+
+<p><img src="http://images.srv1.elrod.me/i-love-haproxy-so-much.png" title="&#34;haproxy saves the day&#34;" alt="&#34;haproxy saves the day&#34;"></p>
+
+<p>I added the package requirement to the Puppet manifest and re-ran Puppet on
+app01. A few seconds and a haproxy-status-page refresh later, all was green
+again.</p>
+
+<p>At this point, I figured that everything was fine. app01 seemed to be doing
+fine and serving traffic, so I ran Puppet on the rest of the servers. Ut oh.</p>
+
+<p>I waited a while for Puppet to run (I was using Ansible on our &ldquo;config
+management&rdquo; server, lockbox01 to trigger the Puppet run on appXX). After a
+while of getting impatient, I refreshed the haproxy status page again, and saw
+that app01 was just fine, but all the other app servers had gone red in the
+<code>fp-wiki</code> section. Oh crap.</p>
+
+<p>I flipped back to the terminal, and saw that the Puppet runs had finally
+finished. <code>mediawiki-FedoraBadges</code> 404&rsquo;d when Puppet tried to install it via
+yum. What the heck?</p>
+
+<p>I looked closer and saw that it was actually trying to install the old version
+of <code>mw-FedoraBadges</code> &ndash; the one that had been in staging, which was a slightly
+different version number than the one I was deploying. Yum had cached the old
+version number, when it had last read the repo data of our infrastructure repo
+and Puppet had failed to <code>expire-cache</code> to ensure the latest version was being
+obtained.</p>
+
+<p>I used Ansible to <code>yum clean expire-cache</code> on all app servers, re-ran Puppet on
+them, and everything returned to green instantly.</p>
+
+<p>We never hit outage, but for about 1-2 minutes our wiki was running on one app
+server. Haproxy had saved me from outage not once today, but twice. In about
+five minutes. I now love haproxy. :)</p>
+
+<p>In slightly less stressful news, now you can show off your Fedora Badges on
+your user page in the Fedora Wiki.</p>
+
+<p>Simply add:</p>
+
+<p><code>{{ #fedorabadges: your_fas_username }}</code></p>
+
+<p>where you want them to appear, and</p>
+
+<p><code>{{ #fedorabadgescount: your_fas_username }}</code></p>
+
+<p>anywhere you want a count of your badges to appear.</p>
+
+<p>You might need to add <code>?action=purge</code> to your userpage the first time, if
+anything goes weird with caching. The extension leverages caching because of
+the fact that it has to call out to Tahrir (which has the Badges information)
+to get your list of badges. This call is potentially really slow, and caching
+makes it be slow once, instead of on every page load.</p>
+
+<p>The cache should last ~24 hours I believe, so at most, someone&rsquo;s badges, as
+displayed on their user page, will be 23 hours and 59 minutes out of date.
+You can always purge the cache by adding <code>?action=purge</code> to the URL of the
+user page.</p>
+
+<p>As an alternative (but hacky) way around this, I&rsquo;m thinking about having the
+badge awarder purge the cache of the awardee&rsquo;s user page, when they are
+awarded a badge. It can do this asynchronously and &ldquo;best effort&rdquo; with no real
+downside if it fails, because it&rsquo;s pretty low priority. I have no idea if this
+is something worth pursuing, but it sounds hacky.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,6 +608,10 @@ and make something cool!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/01/how-to-not-look-like-a-fool-due-to-haproxy/">How to not look like a fool due to haproxy</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/09/goodbye-to-a-true-friend/">Goodbye to a great friend</a>
       </li>
     
@@ -483,10 +625,6 @@ and make something cool!</p>
     
       <li class="post">
         <a href="/blog/2012/06/04/elixir-language-is-now-in-fedora-17/">Elixir Language is now in Fedora 17</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/29/fedora-17-on-raspberry-pi/">Fedora 17 on Raspberry Pi</a>
       </li>
     
   </ul>
