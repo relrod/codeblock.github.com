@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: eval.so, | CodeBlock's Blog]]></title>
+  <link href="http://CodeBlock.github.io/blog/categories/eval-dot-so/atom.xml" rel="self"/>
+  <link href="http://CodeBlock.github.io/"/>
+  <updated>2013-12-28T11:03:15-05:00</updated>
+  <id>http://CodeBlock.github.io/</id>
+  <author>
+    <name><![CDATA[Ricky Elrod]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora Copr and eval.so]]></title>
+    <link href="http://CodeBlock.github.io/blog/2013/12/28/fedora-coprs-and-eval-dot-so/"/>
+    <updated>2013-12-28T10:00:00-05:00</updated>
+    <id>http://CodeBlock.github.io/blog/2013/12/28/fedora-coprs-and-eval-dot-so</id>
+    <content type="html"><![CDATA[<p>One of my side projects, <a href="http://eval.so/">http://eval.so/</a> (which I will be writing more about in
+the near future), depends on a lot of programming language environments. In
+short, it provides a sandboxed JSON API to let people evaluate code in a lot of
+languages.</p>
+
+<p>This isn&rsquo;t any kind of official launch/announcement for the project (in fact,
+it is being rewritten and the current API is going to change very soon) &ndash; I
+just wanted to introduce it enough for context of the rest of this post.</p>
+
+<p>Because of the large number of languages that eval.so tries to support, it is
+true that not every compiler/interpreter we want to support is officially
+packaged in our distro of choice for running the system (Fedora). For example,
+eval.so supports <a href="http://rust-lang.org/">Rust</a>, but Rust isn&rsquo;t
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=915043">yet</a> packaged for Fedora.
+We also support some <a href="https://github.com/justinmeza/lci">sillier</a> languages
+that nobody has bothered to package yet.</p>
+
+<p>For development purposes, we have been using a
+<a href="https://github.com/eval-so/yumrepo">custom repository</a> with some
+<a href="https://github.com/eval-so/yumrepo/blob/master/specs/build.sh">hacky scripts</a>
+for maintaining the packages within. This has worked well, but has ended up
+becoming something of a time-sink as the scripts need to be updated for each
+new Fedora release, and all the packages have to be rebuilt (usually on my
+laptop). Essentially we were using a few hacky bash scripts as a build system
+before uploading the RPMs and repo data up to S3.</p>
+
+<p>I knew this was the wrong approach, but it worked, and it seemed easier than
+setting up a huge build system like <a href="http://koji.fedoraproject.org">Koji</a> for
+our custom packages. But it came to my attention that there exists another
+solution that didn&rsquo;t involve setting up Koji or using hacky shell scripts.</p>
+
+<p>Enter <a href="http://copr.fedoraproject.org/">Copr</a>.</p>
+
+<p>Copr is a Fedora-hosted system that is similar to ArchLinux&rsquo;s AUR or Ubuntu&rsquo;s
+PPA system in that it allows people to create unofficial repositories
+containing unofficial packages, so long as those packages are legal and
+acceptable by the
+<a href="https://fedorahosted.org/copr/wiki/UserDocs#WhatIcanbuildinCopr">guidelines</a>.</p>
+
+<p>Our usecase is perfectly in-line with what the
+<a href="https://fedoraproject.org/wiki/Category:Copr?rd=Category:Kopers#Usage_Cases">original idea</a>
+for creating Copr was. So by using Copr we no longer need to maintain hacky
+shell scripts and S3 repos. We simply make .src.rpms of our custom packages,
+upload them somewhere, then tell Copr to go out and build them and add them to
+our repository. It handles the rest.</p>
+
+<p>There&rsquo;s also a really cool <a href="http://copr.fedoraproject.org/api/">API</a>, so we
+could, in theory, script builds to occur as other events happen. For example,
+we could relatively easily[1] have a new RPM build occur with each commit to
+a repository.</p>
+
+<p>Another cool thing about Copr is the CLI application (which uses the API I
+mentioned above). You don&rsquo;t even need to leave your terminal to trigger builds.
+Pierre-Yves (pingou) speaks about this CLI
+<a href="http://blog.pingoured.fr/index.php?post/2013/03/04/Fedora-Infra%3A-Did-you-know-copr-cli">here</a>.</p>
+
+<p>One last thing &ndash; It is worth noting that I plan on eventually trying to get
+the packages in our
+<a href="http://copr.fedoraproject.org/coprs/codeblock/evalso/">new eval.so copr</a> into
+Fedora&rsquo;s official repos. But it&rsquo;s a lot easier to test things and get them live
+quickly by putting them in a custom repository before having to go through the
+review process required for official packages.</p>
+
+<p>So bye-bye <a href="http://yum.eval.so/">http://yum.eval.so/</a> and hello Copr!</p>
+
+<p>[1] This would be slightly complicated by needing something listening for a
+post-receive hook from GitHub and actually triggering the build, but this
+could be done very easily via Travis-CI by storing the Copr API key in a
+<a href="http://about.travis-ci.org/docs/user/encryption-keys/">secret environment variable</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
