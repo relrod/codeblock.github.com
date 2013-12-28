@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: fedora, | CodeBlock's Blog]]></title>
+  <title><![CDATA[Category: fedora | CodeBlock's Blog]]></title>
   <link href="http://CodeBlock.github.io/blog/categories/fedora/atom.xml" rel="self"/>
   <link href="http://CodeBlock.github.io/"/>
-  <updated>2013-12-28T13:30:21-05:00</updated>
+  <updated>2013-12-28T13:31:32-05:00</updated>
   <id>http://CodeBlock.github.io/</id>
   <author>
     <name><![CDATA[Ricky Elrod]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora Copr and eval.so]]></title>
+    <link href="http://CodeBlock.github.io/blog/2013/12/28/fedora-coprs-and-eval-dot-so/"/>
+    <updated>2013-12-28T10:00:00-05:00</updated>
+    <id>http://CodeBlock.github.io/blog/2013/12/28/fedora-coprs-and-eval-dot-so</id>
+    <content type="html"><![CDATA[<p>One of my side projects, <a href="http://eval.so/">http://eval.so/</a> (which I will be writing more about in
+the near future), depends on a lot of programming language environments. In
+short, it provides a sandboxed JSON API to let people evaluate code in a lot of
+languages.</p>
+
+<p>This isn&rsquo;t any kind of official launch/announcement for the project (in fact,
+it is being rewritten and the current API is going to change very soon) &ndash; I
+just wanted to introduce it enough for context of the rest of this post.</p>
+
+<p>Because of the large number of languages that eval.so tries to support, it is
+true that not every compiler/interpreter we want to support is officially
+packaged in our distro of choice for running the system (Fedora). For example,
+eval.so supports <a href="http://rust-lang.org/">Rust</a>, but Rust isn&rsquo;t
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=915043">yet</a> packaged for Fedora.
+We also support some <a href="https://github.com/justinmeza/lci">sillier</a> languages
+that nobody has bothered to package yet.</p>
+
+<p>For development purposes, we have been using a
+<a href="https://github.com/eval-so/yumrepo">custom repository</a> with some
+<a href="https://github.com/eval-so/yumrepo/blob/master/specs/build.sh">hacky scripts</a>
+for maintaining the packages within. This has worked well, but has ended up
+becoming something of a time-sink as the scripts need to be updated for each
+new Fedora release, and all the packages have to be rebuilt (usually on my
+laptop). Essentially we were using a few hacky bash scripts as a build system
+before uploading the RPMs and repo data up to S3.</p>
+
+<p>I knew this was the wrong approach, but it worked, and it seemed easier than
+setting up a huge build system like <a href="http://koji.fedoraproject.org">Koji</a> for
+our custom packages. But it came to my attention that there exists another
+solution that didn&rsquo;t involve setting up Koji or using hacky shell scripts.</p>
+
+<p>Enter <a href="http://copr.fedoraproject.org/">Copr</a>.</p>
+
+<p>Copr is a Fedora-hosted system that is similar to ArchLinux&rsquo;s AUR or Ubuntu&rsquo;s
+PPA system in that it allows people to create unofficial repositories
+containing unofficial packages, so long as those packages are legal and
+acceptable by the
+<a href="https://fedorahosted.org/copr/wiki/UserDocs#WhatIcanbuildinCopr">guidelines</a>.</p>
+
+<p>Our usecase is perfectly in-line with what the
+<a href="https://fedoraproject.org/wiki/Category:Copr?rd=Category:Kopers#Usage_Cases">original idea</a>
+for creating Copr was. So by using Copr we no longer need to maintain hacky
+shell scripts and S3 repos. We simply make .src.rpms of our custom packages,
+upload them somewhere, then tell Copr to go out and build them and add them to
+our repository. It handles the rest.</p>
+
+<p>There&rsquo;s also a really cool <a href="http://copr.fedoraproject.org/api/">API</a>, so we
+could, in theory, script builds to occur as other events happen. For example,
+we could relatively easily[1] have a new RPM build occur with each commit to
+a repository.</p>
+
+<p>Another cool thing about Copr is the CLI application (which uses the API I
+mentioned above). You don&rsquo;t even need to leave your terminal to trigger builds.
+Pierre-Yves (pingou) speaks about this CLI
+<a href="http://blog.pingoured.fr/index.php?post/2013/03/04/Fedora-Infra%3A-Did-you-know-copr-cli">here</a>.</p>
+
+<p>One last thing &ndash; It is worth noting that I plan on eventually trying to get
+the packages in our
+<a href="http://copr.fedoraproject.org/coprs/codeblock/evalso/">new eval.so copr</a> into
+Fedora&rsquo;s official repos. But it&rsquo;s a lot easier to test things and get them live
+quickly by putting them in a custom repository before having to go through the
+review process required for official packages.</p>
+
+<p>So bye-bye <a href="http://yum.eval.so/">http://yum.eval.so/</a> and hello Copr!</p>
+
+<p>[1] This would be slightly complicated by needing something listening for a
+post-receive hook from GitHub and actually triggering the build, but this
+could be done very easily via Travis-CI by storing the Copr API key in a
+<a href="http://about.travis-ci.org/docs/user/encryption-keys/">secret environment variable</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to not look like a fool due to haproxy]]></title>
@@ -117,6 +194,105 @@ badge awarder purge the cache of the awardee&rsquo;s user page, when they are
 awarded a badge. It can do this asynchronously and &ldquo;best effort&rdquo; with no real
 downside if it fails, because it&rsquo;s pretty low priority. I have no idea if this
 is something worth pursuing, but it sounds hacky.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Goodbye to a great friend]]></title>
+    <link href="http://CodeBlock.github.io/blog/2013/07/09/goodbye-to-a-true-friend/"/>
+    <updated>2013-07-09T23:45:00-04:00</updated>
+    <id>http://CodeBlock.github.io/blog/2013/07/09/goodbye-to-a-true-friend</id>
+    <content type="html"><![CDATA[<p>I first met Seth on IRC in June of 2010 when I joined the Infrastructure team.
+From the very start, I admired his ability to say what he feels about something
+without holding back. He was always able to tell someone how amazing or how bad
+their idea was, in relation to something else. This made him very unique.
+He was always very good at explaining his thought process, as well. He never
+failed to have real, valid reasons for thinking so strongly about something. It
+was never a blind emotion.</p>
+
+<p>He was extremely caring. This past Fudcon, a small group of us went to get
+dinner, and I was particularly quiet because I was tired. He turned to me and
+asked, very genuinely, &ldquo;Are you okay? You look like something is bothering you.&rdquo;
+He was always that way, and if someone needed help with something, he would
+drop what he was doing to go help them.</p>
+
+<p>He was a very productive person. Always on IRC, even in the early morning hours
+with me sometimes, whenever I needed help with something I was working on, or
+when servers blew up, and I had trouble determining why.</p>
+
+<p>He was a very logical person, and all three FUDCons that I have attended were
+filled with evenings of him talking about anything from software, to food, to
+philosophy. And he retained the quality of having very logical reasons for what
+he was saying, each and every time.</p>
+
+<p>But most of all, he was a good friend. Someone that I knew I could talk to if I
+needed help with things. Someone who could make you feel better when you were
+having a bad day. Someone who genuinely cared about me and my success.</p>
+
+<p>Seth, I only knew you for 3 very short years, but I will sincerely miss you. You
+were a great friend and community member, and words alone cannot express my
+feelings of loss.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-flask coming to EPEL 6 soon-ish]]></title>
+    <link href="http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6/"/>
+    <updated>2012-07-11T18:20:00-04:00</updated>
+    <id>http://CodeBlock.github.io/blog/2012/07/11/python-flask-coming-to-epel-6</id>
+    <content type="html"><![CDATA[<p>For those not aware, I recently picked up the python-flask and python-werkzeug
+packages, which were going to be orphaned.</p>
+
+<p>I&rsquo;ve spent the majority of today working on getting python-flask and its
+dependencies working on EPEL 6, with Ian Weller.</p>
+
+<p>The current plan is to get Flask 0.9 in EPEL right from the get-go.</p>
+
+<p>There are two small patches we need to apply to the package to make using it
+as painless as possible on RHEL environments. They both relate to telling
+Flask to use the right Jinja2 package.</p>
+
+<p>RHEL6-optional has Jinja 2.2.1. Flask requires 2.4 or greater. So we use the
+EPEL version of Jinja2, <code>python-jinja2-26</code> which gives us Jinja 2.6. But we
+need to tell Flask that it should import the 2.6 version, not the 2.2 version.</p>
+
+<p>The other blocker is <code>python2-werkzeug</code> &mdash; the current EPEL 6 version of
+werkzeug is 0.6.2. The plan there is to update that to 0.8.3, pending an
+exemption of the Incompatible Upgrades Policy, at the EPEL meeting on Monday.</p>
+
+<p>In any case, I just wanted to throw it out there that we are working on this
+and we plan on having these pushed to EPEL soon. We&rsquo;re starting to develop
+some custom apps with Flask, for use in the Fedora Infrastructure, so
+this had to be done sooner or later.</p>
+
+<p>Stay tuned.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Elixir Language is now in Fedora 17]]></title>
+    <link href="http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17/"/>
+    <updated>2012-06-04T11:24:00-04:00</updated>
+    <id>http://CodeBlock.github.io/blog/2012/06/04/elixir-language-is-now-in-fedora-17</id>
+    <content type="html"><![CDATA[<p>Well it&rsquo;s been a week since my
+<a href="http://elixir-lang.org/">Elixir language</a> package got
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=825418#c4">approved</a> and I am
+happy to announce that it has been pushed to stable, and now appears in the
+Fedora 17 updates repository.</p>
+
+<p>Anyone who uses Fedora 17 or Fedora Rawhide, and wants to try out the new
+programming language by José Valim (which runs on the Erlang VM), can simply:
+<code>sudo yum install elixir</code></p>
+
+<p>I might later on introduce an <code>elixir-git</code> subpackage for rawhide that tracks
+Elixir&rsquo;s git repository more closely, but for now the <code>elixir</code> package tracks
+the stable, currently 0.5.0 release, of Elixir.</p>
+
+<p><code>elixir
+iex&gt; IO.puts "Happy hacking!"
+Happy hacking!
+:ok
+</code></p>
 ]]></content>
   </entry>
   
